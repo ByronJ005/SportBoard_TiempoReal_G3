@@ -4,6 +4,8 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { CalendarioRoutingModule } from './calendario-routing.module';
 import { SorteoComponent } from './sorteo/sorteo.component';
 import { MatchtableComponent } from './matchtable/matchtable.component';
+import { TabpartidosComponent } from './tabpartidos/tabpartidos.component';
+import { MatchesComponent } from './matches/matches.component';
 
 
 @NgModule({
@@ -14,6 +16,8 @@ import { MatchtableComponent } from './matchtable/matchtable.component';
     CalendarComponent,
     SorteoComponent,
     MatchtableComponent,
+    TabpartidosComponent,
+    MatchesComponent,
   ],
   exports: [SorteoComponent]
 })

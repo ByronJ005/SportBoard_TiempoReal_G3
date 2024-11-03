@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../shared/shared.module';
 import { CoreModule } from '../../core/core.module';
 import { MatExpansionModule } from '@angular/material/expansion';
-
+import { MatTableDataSource } from '@angular/material/table';
 
 interface Partido {
     id: number;
@@ -24,13 +23,12 @@ interface Partido {
 @Component({
     selector: 'app-matchtable',
     standalone: true,
-    imports: [RouterModule, SharedModule, CommonModule, CoreModule ,MatExpansionModule],
+    imports: [RouterModule, SharedModule, CoreModule ,MatExpansionModule],
     templateUrl: './matchtable.component.html',
     styleUrl: './matchtable.component.scss',
 })
-export class MatchtableComponent {
+export class MatchtableComponent{
     displayedColumns: string[] = [
-        'id',
         'equipo1',
         'puntaje',
         'equipo2',
@@ -201,7 +199,7 @@ export class MatchtableComponent {
           nombreEq1: 'Barcelona SC',
           puntaje1: 3,
           puntaje2: 2,
-          nombreEq2: 'Flamengo',
+          nombreEq2: 'Emelec',
           escudo2: 'https://upload.wikimedia.org/wikipedia/commons/0/0b/EscudoCSEmelec.png',
           estadio: 'Arena do Grêmio',
           fecha: '2024-11-04',
@@ -220,5 +218,12 @@ export class MatchtableComponent {
           hora: '20:00',
       },
   ];
-  
+  getPartidosOrdenados(): MatTableDataSource<Partido> {
+    const partidosOrdenados = this.partidos.sort((a,b) => {
+      const fechaA = new Date(`${a.fecha}T${a.hora}`);
+      const fechaB = new Date(`${b.fecha}T${b.hora}`);
+      return fechaB.getTime() - fechaA.getTime(); 
+    });
+    return new MatTableDataSource(partidosOrdenados);
+  }
 }

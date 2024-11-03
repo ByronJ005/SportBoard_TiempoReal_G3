@@ -1,0 +1,27 @@
+.logos img {
+    width: 150px; /* Aumenta el tamaño de los logos */
+    height: 150px; /* Asegura que mantenga la proporción */
+    margin: 20px; /* Aumenta el espacio entre los logos */
+    border-radius: 50%; /* Hace los logos completamente redondos */
+    border: 2px solid #ccc; /* Agrega un borde fino alrededor */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añade una sombra ligera */
+    transition: transform 0.2s; /* Suaviza la animación */
+}
+
+.logos img:hover {
+    transform: scale(1.1); /* Efecto de zoom al pasar el cursor */
+    box-shadow: 0 16px 16px rgba(0, 0, 0, 0.2); /* Aumenta la sombra al hacer hover */
+}
+
+.logos {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.ventana {
+
+  flex-direction: column;
+  padding: 10px;
+}
+

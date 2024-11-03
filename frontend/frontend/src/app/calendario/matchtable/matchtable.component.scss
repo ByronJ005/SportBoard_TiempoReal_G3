@@ -6,6 +6,7 @@ body {
     height: 100%;
     margin: 0;
 }
+
 table {
   width: 100%;
   max-width: 800px; /* Ajusta el ancho máximo para evitar que la tabla sea demasiado grande */
@@ -47,24 +48,6 @@ th {
   font-weight: bold;
 }
 
-.logos img {
-    width: 80px; /* Aumenta el tamaño de los logos */
-    height: 80px; /* Asegura que mantenga la proporción */
-    margin: 10px; /* Aumenta el espacio entre los logos */
-    border-radius: 50%; /* Hace los logos completamente redondos */
-    border: 2px solid #ccc; /* Agrega un borde fino alrededor */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añade una sombra ligera */
-    transition: transform 0.2s; /* Suaviza la animación */
-}
-
-.logos img:hover {
-    transform: scale(1.1); /* Efecto de zoom al pasar el cursor */
-    box-shadow: 0 16px 16px rgba(0, 0, 0, 0.2); /* Aumenta la sombra al hacer hover */
-}
-
-.ventana {
-  margin: 20px;
-}
 .tabs {
   display: flex;
   border-bottom: 1px solid #ccc;
@@ -83,12 +66,7 @@ th {
   font-weight: bold;
   border-top: 2px solid blue;
 }
-.logos {
-  margin-top: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
+
 .equipo1-cell, .equipo2-cell {
   display: flex;
   align-items: center;
