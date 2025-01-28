@@ -1,42 +1,105 @@
 from flask import Blueprint, jsonify, request
-from . import db
-from .models import Partido, Evento
+from flask_socketio import emit
+from . import db, socketio
+from .models import Partido, Evento, Equipo, Jugador, Estadio, Fecha
 
 api = Blueprint('api', __name__)
 
-# Obtener todos los partidos
+# Panel de control para seguimiento en tiempo real de los partidos
 @api.route('/api/partidos', methods=['GET'])
 def get_partidos():
     partidos = Partido.query.all()
     result = [
         {
             "id": partido.id,
-            "equipo_local": partido.equipo_local,
-            "equipo_visitante": partido.equipo_visitante,
-            "fecha": partido.fecha.isoformat(),  # Convertir fecha a string en formato ISO
-            "eventos": [{"id": evento.id, "tipo": evento.tipo, "minuto": evento.minuto} for evento in partido.eventos]
+            "equipo_local": partido.equipo_local.nombre,
+            "equipo_visitante": partido.equipo_visitante.nombre,
+            "fecha": partido.fecha.isoformat(),
+            "goles_local": partido.goles_local,
+            "goles_visitante": partido.goles_visitante,
+            "eventos": [
+                {
+                    "id": evento.id,
+                    "tipo": evento.tipo,
+                    "minuto": evento.minuto
+                }
+                for evento in partido.eventos
+            ]
         }
         for partido in partidos
     ]
     return jsonify({"message": "Lista de partidos", "data": result}), 200
-    #return jsonify(result), 200
 
-# Obtener todos los eventos
-@api.route('/api/eventos', methods=['GET'])
-def get_eventos():
-    eventos = Evento.query.all()
-    result = [
-        {
-            "id": evento.id,
-            "tipo": evento.tipo,
-            "minuto": evento.minuto,
-            "partido_id": evento.partido_id
+
+# Marcador en vivo: Obtener datos específicos de un partido
+@api.route('/api/partidos/<int:partido_id>', methods=['GET'])
+def get_partido(partido_id):
+    partido = Partido.query.get(partido_id)
+    if not partido:
+        return jsonify({"error": "Partido no encontrado"}), 404
+
+    result = {
+        "id": partido.id,
+        "equipo_local": partido.equipo_local.nombre,
+        "equipo_visitante": partido.equipo_visitante.nombre,
+        "fecha": partido.fecha.isoformat(),
+        "goles_local": partido.goles_local,
+        "goles_visitante": partido.goles_visitante,
+        "eventos": [
+            {
+                "id": evento.id,
+                "tipo": evento.tipo,
+                "minuto": evento.minuto
+            }
+            for evento in partido.eventos
+        ]
+    }
+    return jsonify({"message": "Detalles del partido", "data": result}), 200
+
+
+# Crear un nuevo partido
+@api.route('/api/partidos', methods=['POST'])
+def create_partido():
+    data = request.json
+
+    # Validar datos obligatorios
+    if not data or "equipo_local_id" not in data or "equipo_visitante_id" not in data or "fecha_id" not in data or "estadio_id" not in data:
+        return jsonify({"error": "Faltan datos obligatorios"}), 400
+
+    # Validar equipos, fecha y estadio
+    equipo_local = Equipo.query.get(data["equipo_local_id"])
+    equipo_visitante = Equipo.query.get(data["equipo_visitante_id"])
+    fecha = Fecha.query.get(data["fecha_id"])
+    estadio = Estadio.query.get(data["estadio_id"])
+
+    if not equipo_local or not equipo_visitante or not fecha or not estadio:
+        return jsonify({"error": "Equipos, fecha o estadio no válidos"}), 404
+
+    # Crear nuevo partido
+    nuevo_partido = Partido(
+        equipo_local_id=equipo_local.id,
+        equipo_visitante_id=equipo_visitante.id,
+        fecha_id=fecha.id,
+        estadio_id=estadio.id,
+        goles_local=0,
+        goles_visitante=0
+    )
+    db.session.add(nuevo_partido)
+    db.session.commit()
+
+    return jsonify({
+        "message": "Partido creado con éxito",
+        "data": {
+            "id": nuevo_partido.id,
+            "equipo_local": equipo_local.nombre,
+            "equipo_visitante": equipo_visitante.nombre,
+            "fecha": fecha.inicio.isoformat(),
+            "estadio": estadio.nombre
         }
-        for evento in eventos
-    ]
-    return jsonify({"message": "Lista de eventos", "data": result}), 200
+    }), 201
 
-# Crear un nuevo evento
+
+# Actualización en tiempo real de estadísticas (goles, faltas, sustituciones, etc.)
 @api.route('/api/eventos', methods=['POST'])
 def create_evento():
     data = request.json
@@ -59,6 +122,14 @@ def create_evento():
     db.session.add(nuevo_evento)
     db.session.commit()
 
+    # Emitir evento en tiempo real
+    socketio.emit('nuevo_evento', {
+        "id": nuevo_evento.id,
+        "tipo": nuevo_evento.tipo,
+        "minuto": nuevo_evento.minuto,
+        "partido_id": nuevo_evento.partido_id
+    })
+
     return jsonify({
         "message": "Evento creado con éxito",
         "data": {
@@ -69,15 +140,36 @@ def create_evento():
         }
     }), 201
 
-# Aquí irán los endpoints de las APIs
-"""@api.route('/api/partidos', methods=['GET'])
-def get_partidos():
-    return jsonify({"message": "Lista de partidos", "data": []})
 
-# Endpoint de ejemplo
-@api.route('/api/partidos', methods=['POST'])
-def create_partido():
+# Actualizar marcador en tiempo real
+@api.route('/api/partidos/<int:partido_id>/marcador', methods=['PUT'])
+def update_marcador(partido_id):
     data = request.json
-    if not data:
-        return jsonify({"error": "No se enviaron datos"}), 400
-    return jsonify({"message": "Partido creado", "data": data}), 201"""
+
+    if not data or "goles_local" not in data or "goles_visitante" not in data:
+        return jsonify({"error": "Faltan datos obligatorios"}), 400
+
+    partido = Partido.query.get(partido_id)
+    if not partido:
+        return jsonify({"error": "Partido no encontrado"}), 404
+
+    # Actualizar marcador
+    partido.goles_local = data["goles_local"]
+    partido.goles_visitante = data["goles_visitante"]
+    db.session.commit()
+
+    # Emitir actualización en tiempo real
+    socketio.emit('actualizacion_partido', {
+        "id": partido.id,
+        "goles_local": partido.goles_local,
+        "goles_visitante": partido.goles_visitante
+    })
+
+    return jsonify({
+        "message": "Marcador actualizado con éxito",
+        "data": {
+            "id": partido.id,
+            "goles_local": partido.goles_local,
+            "goles_visitante": partido.goles_visitante
+        }
+    }), 200

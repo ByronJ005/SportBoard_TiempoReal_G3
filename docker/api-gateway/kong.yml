@@ -15,11 +15,8 @@ services:
         paths:
           - /catalog/catalogs
   - name: real-time-service
-    url: http://ms3-real-time:5000/api  
+    url: http://ms3-real-time:5000
     routes:
-      - name: matches-route
+      - name: real-time-route
         paths:
-          - /api/partidos
-      - name: events-route
-        paths:
-          - /api/eventos
+          - /api

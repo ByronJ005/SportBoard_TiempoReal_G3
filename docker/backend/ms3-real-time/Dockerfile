@@ -21,4 +21,5 @@ EXPOSE 5000
 
 # Comando para iniciar Flask
 #CMD ["flask", "run", "--host=0.0.0.0"]
-CMD ["python", "run.py"] 
+#CMD ["python", "run.py"]
+CMD ["bash", "-c", "flask db upgrade && python run.py"]
