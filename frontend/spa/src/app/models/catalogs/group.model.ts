@@ -3,14 +3,14 @@ import { Catalog } from "./catalog.model";
 
 export interface Group {
     // id: number; // Eliminado porque code es la llave principal
-    name: string;
     code: string;
-    parentCode?: string;
-    parent?: Group;
-    children?: Group[];
     catalogList?: Catalog[];
+    children?: Group[];
     description?: string;
     isActive?: boolean;
+    name: string;
+    parent?: Group;
+    parentCode?: string;
     version?: number;
 }
 

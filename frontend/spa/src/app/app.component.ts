@@ -21,7 +21,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
     ]
 })
 export class AppComponent {
-    title = 'my-app';
+    title = 'SportBoard';
     isSidebarOpen = true;
     isMobile = false;
 

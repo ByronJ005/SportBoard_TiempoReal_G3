@@ -20,7 +20,6 @@ Este proyecto es parte del backend de SportBoard y maneja los catálogos y grupo
 *  `PUT /api/groups/{code}`: Actualiza un grupo existente.
 *  `DELETE /api/groups/{code}`: Elimina un grupo por su código.
 
-
 ### Catálogos
 
 *  `GET /api/catalogs`: Obtiene todos los catálogos.
@@ -45,3 +44,19 @@ Las contribuciones son bienvenidas. Por favor, abre un issue o un pull request p
 
 ## Licencia
 Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo LICENSE para más detalles.
+
+## Estructura del Proyecto
+
+1. **README.md**: Contiene la documentación del proyecto, incluyendo requisitos, configuración, endpoints disponibles, convenciones de nomenclatura, contribuciones y licencia.
+
+2. **Program.cs**: Configura y arranca la aplicación ASP.NET Core. Incluye la configuración de CORS, la configuración de la base de datos, la inicialización de datos y la configuración de Swagger para la documentación de la API.
+
+3. **CatalogController.cs**: Controlador que maneja las solicitudes HTTP relacionadas con los catálogos. Proporciona endpoints para obtener, crear, actualizar y eliminar catálogos, así como para obtener los catálogos hijos de un catálogo específico.
+
+4. **Catalogs.http**: Archivo de ejemplo para realizar solicitudes HTTP a la API.
+
+5. **Catalogs.csproj**: Archivo de proyecto que define las dependencias y configuraciones del proyecto .NET.
+
+6. **appsettings.json**: Archivo de configuración que contiene las cadenas de conexión a la base de datos y configuraciones de logging.
+
+7. **appsettings.Development.json**: Archivo de configuración específico para el entorno de desarrollo.

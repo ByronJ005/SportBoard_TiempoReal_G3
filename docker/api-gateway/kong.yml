@@ -23,3 +23,25 @@ services:
       - name: events-route
         paths:
           - /api/eventos
+
+  - name: ms2-competencies
+    url: http://ms2-competencies:8003
+    routes:
+      - name: ms2-competencies-route
+        paths:
+          - /api
+        strip_path: false
+  - name: static-files
+    url: http://ms2-competencies:8003
+    routes:
+      - name: static-files-route
+        paths:
+          - /static/
+        strip_path: false
+  - name: media-files
+    url: http://ms2-competencies:8003
+    routes:
+      - name: media-files-route
+        paths:
+          - /media/
+        strip_path: false

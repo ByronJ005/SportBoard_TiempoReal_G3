@@ -1,5 +1,5 @@
 <h1 mat-dialog-title>{{ data.code ? 'Editar Grupo' : 'Agregar Grupo' }}</h1>
-<div mat-dialog-content [formGroup]="groupForm">
+<div mat-dialog-content [formGroup]="groupForm" class="form-field-container">
     <mat-form-field>
         <mat-label>Code</mat-label>
         <input matInput formControlName="code" name="code">
