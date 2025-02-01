@@ -38,13 +38,13 @@ services:
             - kong-migrations
         environment:
             KONG_DATABASE: postgres # base de datos
-            KONG_PG_HOST: postgres  # host de la base de datos
-            KONG_PG_USER: kong    # usuario de la base de datos
-            KONG_PG_PASSWORD: kong    # contraseña de la base de datos
+            KONG_PG_HOST: postgres # host de la base de datos
+            KONG_PG_USER: kong # usuario de la base de datos
+            KONG_PG_PASSWORD: kong # contraseña de la base de datos
             KONG_PROXY_ACCESS_LOG: /dev/stdout # logs de acceso
             KONG_ADMIN_ACCESS_LOG: /dev/stdout # logs de acceso
-            KONG_PROXY_ERROR_LOG: /dev/stderr   # logs de errores
-            KONG_ADMIN_ERROR_LOG: /dev/stderr  # logs de errores
+            KONG_PROXY_ERROR_LOG: /dev/stderr # logs de errores
+            KONG_ADMIN_ERROR_LOG: /dev/stderr # logs de errores
             KONG_ADMIN_LISTEN: 0.0.0.0:8001, 0.0.0.0:8444 ssl # puerto de administración
             KONG_ADMIN_GUI_URL: http://localhost:8002 # url de la interfaz de administración
         ports:

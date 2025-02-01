@@ -2,12 +2,11 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-    selector: 'app-sorteo',
-    templateUrl: './sorteo.component.html',
-    styleUrls: ['./sorteo.component.scss'],
-    imports: [CommonModule, SorteoComponent]
+  selector: 'app-sorteo',
+  templateUrl: './sorteo.component.html',
+  styleUrls: ['./sorteo.component.scss'],
+  imports: [CommonModule]
 })
-
 export class SorteoComponent {
   groups: { [key: string]: string[] } = {
     A: ['Real Madrid', 'Juventus', 'PSV', 'Young Boys'],

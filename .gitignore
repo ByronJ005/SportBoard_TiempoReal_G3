@@ -60,7 +60,7 @@ artifacts/
 *.sln.iml
 
 # Mac/Linux temporary files
-.DS_Store
+**/.DS_Store
 *.swp
 *.swo
 
@@ -69,3 +69,7 @@ Thumbs.db
 desktop.ini
 
 node_modules/
+
+# Avoid including .idea directories and their contents
+.idea/
+

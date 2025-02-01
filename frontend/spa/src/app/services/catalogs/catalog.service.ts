@@ -22,14 +22,21 @@ export class CatalogService {
     }
 
     createCatalog(catalog: Catalog): Observable<Catalog> {
+        // Asegúrate de que el objeto catalog tenga todos los campos necesarios, incluyendo idCatalog
         return this.http.post<Catalog>(this.apiUrl, catalog);
     }
 
     updateCatalog(id: number, catalog: Catalog): Observable<Catalog> {
+        console.log('catalog', catalog);
+        // Asegúrate de que el objeto catalog tenga todos los campos necesarios, incluyendo idCatalog
         return this.http.put<Catalog>(`${this.apiUrl}/${id}`, catalog);
     }
 
     deleteCatalog(id: number): Observable<void> {
         return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    }
+
+    updateCatalogWithGroup(id: number, catalog: any): Observable<any> {
+        return this.http.put<any>(`${this.apiUrl}/${id}`, catalog);
     }
 }

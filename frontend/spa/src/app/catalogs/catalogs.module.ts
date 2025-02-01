@@ -8,6 +8,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { SharedModule } from '../shared/shared.module';
 import { GroupService } from '../services/catalogs/group.service';
 import { GroupDialogComponent } from './groups/group-dialog/group-dialog.component';
+import { CatalogDialogComponent } from './catalogs/catalog-dialog/catalog-dialog.component';
 
 @NgModule({
     declarations: [
@@ -15,6 +16,7 @@ import { GroupDialogComponent } from './groups/group-dialog/group-dialog.compone
         GroupsComponent,
         GroupDialogComponent,
         DashboardComponent,
+        CatalogDialogComponent,
     ],
     providers: [
         GroupService

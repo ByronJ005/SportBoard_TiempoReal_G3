@@ -37,12 +37,14 @@ namespace Catalogs.Controllers
             .Select(c => new Catalog
             {
                 Id = c.Id,
-                Name = c.Name,
                 Code = c.Code,
+                Description = c.Description,
+                Group = c.Group,
                 GroupCode = c.GroupCode,
                 IdCatalog = c.IdCatalog,
                 IsActive = c.IsActive,
-                Group = c.Group // Incluir el grupo en la respuesta
+                Name = c.Name,
+                Version = c.Version,
             })
             .ToListAsync();
         }
@@ -77,6 +79,7 @@ namespace Catalogs.Controllers
         [HttpPost]
         public async Task<ActionResult<Catalog>> PostCatalog(Catalog catalog)
         {
+            // Asegúrate de que el objeto catalog tenga todos los campos necesarios
             _context.Catalogs.Add(catalog);
             await _context.SaveChangesAsync();
 
