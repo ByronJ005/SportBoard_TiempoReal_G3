@@ -1,8 +1,39 @@
+<app-breadcrumb [breadcrumbs]="breadcrumbs"></app-breadcrumb>
+<h4>Seguimiento en tiempo real</h4>
+
 <mat-card appearance="outlined" style="margin-bottom: 20px;">
     <mat-card-content>
         <p style="margin-top: 1px;">{{ currentDate | date: 'fullDate' }}</p>
     </mat-card-content>
 </mat-card>
+
+<mat-sidenav-container class="example-container">
+    <mat-sidenav mode="side" opened>
+        <mat-toolbar>Competencias fijadas</mat-toolbar>
+        <mat-list>
+            <mat-list-item *ngFor="let competencia of competencias">
+                {{ competencia.nombre }}
+                <button mat-icon-button (click)="quitarCompetencia(competencia)">
+                    <mat-icon>delete</mat-icon>
+                    <a matTooltip="Quitar de la lista"></a>
+                </button>
+            </mat-list-item>
+        </mat-list>
+        <button mat-raised-button color="primary" (click)="agregarCompetencia()">
+            Agregar a la lista
+        </button>
+    </mat-sidenav>
+<mat-sidenav-content>
+
+<mat-tab-group>
+    <mat-tab label="Todos">
+        Content 1
+    </mat-tab>
+    <mat-tab label="En directo"> Content 2 </mat-tab>
+    <mat-tab label="Finalizados"> Content 3 </mat-tab>
+    <mat-tab label="Próximos"> Content 4 </mat-tab>
+</mat-tab-group>
+<!--
 <mat-card appearance="outlined" style="margin-bottom: 20px;">
     <mat-card-content>
         <div style="display: flex; gap: 10px;">
@@ -61,4 +92,4 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
     </mat-card-content>
-</mat-card>
+</mat-card>-->

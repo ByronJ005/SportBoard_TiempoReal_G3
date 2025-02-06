@@ -14,15 +14,61 @@ services:
       - name: catalogs-route
         paths:
           - /catalog/catalogs
+
   - name: real-time-service
     url: http://ms3-real-time:5000/api  
     routes:
+      - name: users-route
+        paths:
+          - /real-time/users
+      - name: teams-route
+        paths:
+          - /real-time/teams
+      - name: players-route
+        paths:
+          - /real-time/players
+      - name: coaches-route
+        paths:
+          - /real-time/coaches
+      - name: seasons-route
+        paths:
+          - /real-time/seasons
+      - name: competitions-route
+        paths:
+          - /real-time/competitions
       - name: matches-route
         paths:
-          - /api/partidos
+          - /real-time/matches # formato microservicio/endpoint
       - name: events-route
         paths:
-          - /api/eventos
+          - /real-time/events
+      - name: matches-by-day
+        paths:
+          - /real-time/matches/by-day
+      - name: matches-filter
+        paths:
+          - /real-time/matches/filter
+      - name: player-match-stats
+        paths:
+        # {} no es reconocido por Kong
+        #  - /real-time/matches/{match_id}/player-stats
+        - /real-time/matches/:match_id/player-stats
+      - name: player-season-stats
+        paths:
+          - /real-time/player-statistics
+      - name: team-match-stats
+        paths:
+          - /real-time/matches/:match_id/team-stats
+      - name: team-season-stats
+        paths:
+          - /real-time/team-statistics
+      - name: match-events
+        paths:
+          - /real-time/matches/:match_id/events
+      - name: team-classification
+        paths:
+          - /real-time/team-statistics/classification
+      
 
   - name: ms2-competencies
     url: http://ms2-competencies:8003

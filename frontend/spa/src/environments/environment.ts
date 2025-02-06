@@ -39,6 +39,27 @@ export const environment = {
                 media: '/media',
             },
         },
+        realTime: { 
+            base: '/real-time', //Debe coincidir con el path del microservicio en Kong.yml
+            endpoints: {
+                users : '/users',
+                teams: '/teams',
+                players: '/players',
+                coaches: '/coaches',
+                seasons: '/seasons',
+                competitions: '/competitions',
+                matches: '/matches',
+                events: '/events',
+                matchesByDay: '/matches/by-day',
+                matchesFilter: '/matches/filter',
+                playerMatchStats: '/matches',  // Se completará la URL: /matches/{match_id}/player-stats
+                playerSeasonStats: '/player-statistics',
+                teamMatchStats: '/matches',    // Se completará la URL: /matches/{match_id}/team-stats
+                teamSeasonStats: '/team-statistics',
+                matchEvents: '/matches',       // Se completará la URL: /matches/{match_id}/events
+                teamClassification: '/team-statistics/classification'
+            },
+        },
     },
 };
 
@@ -71,3 +92,27 @@ environment.services.competencies.endpoints.localities = `${environment.services
 environment.services.competencies.endpoints.countries = `${environment.services.competencies.base}/countries/`;
 environment.services.competencies.endpoints.formats = `${environment.services.competencies.base}/formats/`;
 environment.services.competencies.endpoints.media = `${environment.services.competencies.base}/media/`;
+
+// ms3-real-time
+environment.services.realTime.base = `${environment.apiUrl}${environment.services.realTime.base}`;
+environment.services.realTime.endpoints.users = `${environment.services.realTime.base}${environment.services.realTime.endpoints.users}`;
+environment.services.realTime.endpoints.teams = `${environment.services.realTime.base}${environment.services.realTime.endpoints.teams}`;
+environment.services.realTime.endpoints.players = `${environment.services.realTime.base}${environment.services.realTime.endpoints.players}`;
+environment.services.realTime.endpoints.coaches = `${environment.services.realTime.base}${environment.services.realTime.endpoints.coaches}`;
+environment.services.realTime.endpoints.seasons = `${environment.services.realTime.base}${environment.services.realTime.endpoints.seasons}`;
+environment.services.realTime.endpoints.competitions = `${environment.services.realTime.base}${environment.services.realTime.endpoints.competitions}`;
+environment.services.realTime.endpoints.matches = `${environment.services.realTime.base}${environment.services.realTime.endpoints.matches}`;
+environment.services.realTime.endpoints.events = `${environment.services.realTime.base}${environment.services.realTime.endpoints.events}`;
+// irán al matches.services
+environment.services.realTime.endpoints.matchesByDay = `${environment.services.realTime.base}${environment.services.realTime.endpoints.matchesByDay}`;
+environment.services.realTime.endpoints.matchesFilter = `${environment.services.realTime.base}${environment.services.realTime.endpoints.matchesFilter}`;
+// irán al player.services
+environment.services.realTime.endpoints.playerMatchStats = `${environment.services.realTime.base}${environment.services.realTime.endpoints.playerMatchStats}`;
+environment.services.realTime.endpoints.playerSeasonStats = `${environment.services.realTime.base}${environment.services.realTime.endpoints.playerSeasonStats}`;
+// irán al team.services
+environment.services.realTime.endpoints.teamMatchStats = `${environment.services.realTime.base}${environment.services.realTime.endpoints.teamMatchStats}`;
+environment.services.realTime.endpoints.teamSeasonStats = `${environment.services.realTime.base}${environment.services.realTime.endpoints.teamSeasonStats}`;
+// irá al matches.services
+environment.services.realTime.endpoints.matchEvents = `${environment.services.realTime.base}${environment.services.realTime.endpoints.matchEvents}`;
+// irá al team.services
+environment.services.realTime.endpoints.teamClassification = `${environment.services.realTime.base}${environment.services.realTime.endpoints.teamClassification}`;
