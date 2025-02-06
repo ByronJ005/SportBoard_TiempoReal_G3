@@ -10,7 +10,7 @@ describe('SelecPartidoComponent', () => {
     await TestBed.configureTestingModule({
       imports: [SelecPartidoComponent, MatButtonModule]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(SelecPartidoComponent);
     component = fixture.componentInstance;

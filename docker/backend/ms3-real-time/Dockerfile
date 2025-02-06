@@ -1,8 +1,7 @@
 # Imagen base de Python
 FROM python:3.9-slim
 
-# Instalar dependencias del sistema necesarias para cx_Oracle
-RUN apt-get update && apt-get install -y libaio1 && rm -rf /var/lib/apt/lists/*
+# No se necesitan dependencias adicionales de cx_Oracle
 
 # Crear el directorio de trabajo
 WORKDIR /source
@@ -21,4 +20,5 @@ EXPOSE 5000
 
 # Comando para iniciar Flask
 #CMD ["flask", "run", "--host=0.0.0.0"]
-CMD ["python", "run.py"] 
+#CMD ["python", "run.py"]
+CMD ["bash", "-c", "flask db upgrade && python run.py"] 
