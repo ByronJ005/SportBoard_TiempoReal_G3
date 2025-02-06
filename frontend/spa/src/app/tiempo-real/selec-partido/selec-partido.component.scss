@@ -1,4 +1,42 @@
-button[mat-fab][extended] {
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; // Asegura que el componente ocupe toda la altura de la ventana
+  }
+  
+  mat-sidenav-container {
+    flex: 1;
+    display: flex;
+    height: 100%;
+  }
+  
+  mat-sidenav {
+    width: 250px; // Ajusta el tamaño horizontal según sea necesario
+    display: flex;
+    flex-direction: column;
+    height: 100%; // Asegura que el sidenav ocupe toda la altura disponible
+  }
+  
+  mat-toolbar {
+    flex: 0 0 auto; // Mantiene el tamaño del toolbar fijo
+  }
+  
+  mat-list {
+    flex: 1 1 auto; // Permite que la lista ocupe el espacio disponible
+    overflow-y: auto; // Añade scroll vertical si el contenido es demasiado grande
+  }
+  
+  button.mat-raised-button {
+    flex: 0 0 auto; // Mantiene el tamaño del botón fijo
+    margin: 10px; // Añade un margen para separar el botón del contenido
+  }
+  
+  mat-list-item {
+    display: flex;
+    justify-content: space-between; // Alinea el texto y el botón de eliminar
+    align-items: center;
+  }
+/*button[mat-fab][extended] {
     background-color: #ffffff00; // Customize the background color
     color: #000000; // Customize the text color
     font-size: 14px; // Customize the font size
@@ -21,4 +59,4 @@ button[mat-fab][extended] {
         background-color: #bdbdbd; // Customize the disabled background color
         color: #757575; // Customize the disabled text color
     }
-}
+}*/
