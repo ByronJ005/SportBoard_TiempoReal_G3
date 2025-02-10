@@ -39,6 +39,11 @@ class CustomBottomNavigationBar extends StatelessWidget {
           icon: Icon(Icons.account_circle_sharp),
           label: 'Perfil',
         ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.sports_soccer),
+          // Aquí es donde agregas el ícono de Partidos
+          label: 'Partidos',
+        ),
       ],
       currentIndex: currentIndex,
       selectedItemColor: AppColors.primaryColor,

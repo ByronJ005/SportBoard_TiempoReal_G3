@@ -91,3 +91,43 @@ services:
         paths:
           - /media/
         strip_path: false
+
+consumers:
+  - username: sportboard-consumer
+    jwt_secrets:
+      - key: sportboard-statistics
+        secret: "1234"
+        algorithm: HS256
+
+plugins:
+  - name: cors
+    config:
+      origins:
+        - http://localhost:4200
+      methods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - OPTIONS
+      headers:
+        - Accept
+        - Authorization
+        - Content-Type
+        - Origin
+        - X-Requested-With
+      exposed_headers:
+        - X-Auth-Token
+      credentials: true
+      max_age: 3600
+      preflight_continue: false
+
+  - name: jwt
+    config:
+      claims_to_verify:
+        - exp
+      secret_is_base64: false
+      run_on_preflight: true
+      header_names:
+        - authorization
+  

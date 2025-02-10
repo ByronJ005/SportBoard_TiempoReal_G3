@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/ui/screens/real_time/list_matchs_screen.dart';
 import 'package:provider/provider.dart';
 import '../providers/group_provider.dart';
 import 'widgets/custom_drawer.dart';
@@ -31,6 +32,7 @@ class _SportBoardInterfaceState extends State<SportBoardInterface> {
     TiempoRealScreen(),
     NotificacionesScreen(),
     MensajesScreen(),
+    MatchesPage(),  // Agregar la pantalla de partidos aquí
   ];
 
   void _onItemTapped(int index) {
