@@ -1,0 +1,31 @@
+.competition-header {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.competition-logo {
+  width: 100px;
+  height: auto;
+  margin-right: 20px;
+}
+
+.competition-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.competition-info h1 {
+  font-size: 2em;
+  margin: 0;
+  color: #343a40;
+}
+
+.competition-info h2 {
+  font-size: 1.2em;
+  margin: 0;
+  color: #6c757d;
+}

@@ -1,0 +1,6 @@
+<div class="teams">
+  <div *ngFor="let team of teams" class="team-card">
+    <img [src]="team.logo" alt="{{ team.name }} logo">
+    <span>{{ team.name }}</span>
+  </div>
+</div>
